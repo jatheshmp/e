@@ -1,31 +1,33 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Header from './componrnts/Header'
 import { Container } from 'react-bootstrap'
-import Home from './componrnts/Home'
+
+// 1. Only import each thing ONCE
+import Header from './componrnts/Header'
 import Footer from './componrnts/Footer'
+import Home from './componrnts/Home'
 import Signup from './screen/Signup'
-// 1. ADDED MISSING IMPORT FOR LOGINSCREEN (adjust the path if your file name/folder is different)
-import LoginScreen from './screen/LoginScreen' 
+import LoginScreen from './screen/LoginScreen'
+import ProductDetails from './screen/ProductDetails' 
+import SignupScreen from './screen/SignupScreen'
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Header />
-        <main>
-          <Container>
-            {/* 2. GROUPED ALL ROUTES INSIDE A SINGLE <Routes> CONTAINER */}
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='/login' element={<LoginScreen />} />
-            </Routes>
-          </Container>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            {/* Added the :id parameter so product pages work */}
+            <Route path='/product/:id' element={<ProductDetails />} />
+            <Route path='/signup' element={<SignupScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
+          </Routes>
+        </Container>
+      </main>
+      <Footer />
+    </BrowserRouter>
   )
 }
 
